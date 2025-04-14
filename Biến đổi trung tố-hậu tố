@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+int check(char x){
+	if(x=='*' || x=='/') return 2;
+	else if(x=='+' || x=='-') return 1;
+	else return 0;
+}
+void solve(string s){
+	stack<char> v;
+	string tmp="";
+	for(int i=0;i<s.length();i++){
+		if(s[i]=='('){
+			v.push(s[i]);
+		}else if(s[i]>='A' && s[i]<='Z' || s[i] >= 'a' && s[i] <= 'z'){
+			tmp+=s[i];
+		}else if(s[i]==')'){
+			while(!v.empty() && v.top()!='('){
+				tmp+=v.top();
+				v.pop();
+			}
+			v.pop();
+		}else{
+			while(!v.empty() && check(v.top())>=check(s[i])){
+				tmp+=v.top();
+				v.pop();
+			}
+			v.push(s[i]);
+		}
+	}
+	while(!v.empty()){
+		tmp+=v.top();
+		v.pop();
+	}
+	cout << tmp << endl;
+}
+int main() {
+	int t;
+	cin >> t;
+	while(t--){
+		string s;
+		cin >> s;
+		solve(s);
+	}
+	return 0;
+}
