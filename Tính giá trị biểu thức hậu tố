@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long tinh(long long a, long long b, char x){
+	if(x=='+') return a+b;
+	else if(x=='-') return a-b;
+	else if(x=='*') return a*b;
+	else return a/b;
+}
+void solve(string s){
+	stack<long long> v;
+	for(long long i=0;i<s.length();i++){
+		if(isdigit(s[i])){
+			v.push((long long)s[i]-'0');
+		}else{
+			if(v.size()>1){
+				long long a=(long long)v.top();
+				v.pop();
+				long long b=(long long)v.top();
+				v.pop();
+				long long t=tinh(b,a,s[i]);
+				v.push(t);
+			}
+		}
+	}
+	cout << v.top() << endl;
+}
+int main() {
+	int t;
+	cin >> t;
+	while(t--){
+		string s;
+		cin >> s;
+		solve(s);
+	}
+	return 0;
+}
