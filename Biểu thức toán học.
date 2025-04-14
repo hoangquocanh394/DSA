@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int solve(int a,int b,char x){
+	if(x=='+') return a+b;
+	else if(x=='-') return a-b;
+	else return a*b;
+}
+int check(int a[5]) {
+    char b[3] = {'+', '-', '*'};
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            for (int k = 0; k < 3; ++k) {
+                for (int l = 0; l < 3; ++l) {
+                    int sum = solve(solve(solve(solve(a[0], a[1], b[i]), a[2], b[j]), a[3], b[k]), a[4], b[l]);
+                    if (sum == 23) {
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int a[5];
+		for(int i=0;i<5;i++){
+			cin >> a[i];
+		}
+        sort(a,a+5);
+		int ok=0;
+		do{
+			if(check(a)){
+				ok=1;
+				break;
+			}
+		}while(next_permutation(a,a+5));
+		if(ok==1){
+			cout << "YES" << endl;
+		}else{
+			cout << "NO" << endl;
+		}
+	}
+	return 0;
+}
