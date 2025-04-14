@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+//duong cheo chinh used1[i-j+n]
+//duong cheo phu used2[i+j-1]
+int used[1000],used1[1000],used2[1000],a[1000];
+void Try(int i,int &k,int n){
+	for(int j=1;j<=n;j++){
+		if(used[j]==0 && used1[i-j+n+1]==0 && used2[i+j]==0){
+			a[i]=j;
+			used[j]=1;
+			used1[i-j+n+1]=1;
+			used2[i+j]=1;
+			if(i==n-1){
+				k++;
+			}else{
+				Try(i+1,k,n);
+			}
+			used[j]=0;
+			used1[i-j+n+1]=0;
+			used2[i+j]=0;
+		}
+	}
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		memset(a,0,sizeof(a));
+		memset(used,0,sizeof(used));
+		memset(used1,0,sizeof(used1));
+		memset(used2,0,sizeof(used2));
+		int count=0;
+		Try(0,count,n);
+		cout << count << endl;
+		
+	}
+	return 0;
+}
