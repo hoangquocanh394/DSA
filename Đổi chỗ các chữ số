@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+string smax;
+void solve(string s, int k, int idx){
+	if(k==0){
+		smax=max(s,smax);
+		return;
+	}else{
+		for(int i=idx;i<s.length()-1;i++){
+			for(int j=i+1;j<s.length();j++){
+				if(s[i]<s[j]){
+					swap(s[i],s[j]);
+					solve(s,k-1,i);
+					swap(s[i],s[j]);
+				}
+			}
+		}
+		smax=max(s,smax);
+	}
+}
+int main() {
+	int t;
+	cin >> t;
+	while(t--){
+		int k;
+		cin >> k;
+		string s;
+		cin >> s;
+		smax=s;
+		solve(s,k,0);
+		cout << smax << endl;
+    }
+	return 0;
+}
