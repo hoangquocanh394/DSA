@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+int visited[1000];
+vector<int> a[1000];
+int n,k,s;
+void solve(){
+	queue<int> q;
+	q.push(s);
+	cout << s << " ";
+	visited[s]=1;
+	while(!q.empty()){
+		int v=q.front();
+		q.pop();
+		for(auto x:a[v]){
+			if(visited[x]==0){
+				visited[x]=1;
+				q.push(x);
+				cout << x << " ";
+			}
+		}
+	}
+	cout << endl;
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		cin >> n >> k >> s;
+		for(int i=0;i<k;i++){
+			int x,y;
+			cin >> x >> y;
+			a[x].push_back(y);
+		}
+		memset(visited,0,sizeof(visited));
+		solve();
+	}
+	return 0;
+}
