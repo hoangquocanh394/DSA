@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+void phanhoach(int n,int max_val,vector<int> &v){
+	if(n==0){
+		cout << "(";
+		for(int j=0;j<v.size();j++){
+			cout << v[j];
+			if(j!=v.size()-1) cout << " ";
+			else cout << ") ";
+		}
+	}else{
+		for(int i=min(max_val,n);i>=1;i--){
+			v.push_back(i);
+			phanhoach(n-i,i,v);
+			v.pop_back();
+		}
+	}
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		vector<int> v;
+		phanhoach(n,n,v);
+		cout << endl;
+	}
+	return 0;
+}
+
