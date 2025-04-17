@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long a[1000];
+long long ugly(long long n){
+	a[1]=1;
+	long long i2=1,i3=1,i5=1;
+	for(long long j=2;j<=n;j++){
+		a[j]=min(a[i2]*2,a[i3]*3);
+		a[j]=min(a[j],a[i5]*5);
+		if(a[j]==a[i2]*2){
+			i2++;
+		}
+		if(a[j]==a[i5]*5){
+			i5++;
+		}
+		if(a[j]==a[i3]*3){
+			i3++;
+		}
+	}
+	return a[n];
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		long long n;
+		cin >> n;
+		memset(a,0,sizeof(a));
+		cout << ugly(n) << endl;
+	}
+	return 0;
+}
