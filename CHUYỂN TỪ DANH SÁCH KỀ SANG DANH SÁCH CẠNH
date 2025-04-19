@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int n;
+	cin >> n;
+	vector<int> v[n];
+  cin.ignore();
+	for(int i=0;i<n;i++){
+		string s;
+		getline(cin,s);
+		stringstream ss(s);
+		string tmp;
+		while(ss>>tmp){
+			v[i].push_back(stoi(tmp));
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<v[i].size();j++){
+			if(i+1<v[i][j]){
+				cout << i+1 << " " << v[i][j] << endl;
+			}
+		}
+	}
+}
