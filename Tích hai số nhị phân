@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long chuyendoi(string s){
+	long long sum=0;
+	for(int i=0;i<s.length();i++){
+		sum=sum*2+(s[i]-'0');
+	}
+	return sum;
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		string n,m;
+		cin >> n >> m;
+		long long kq=chuyendoi(n)*chuyendoi(m);
+		cout << kq << endl;
+	}
+}
