@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool cmp(pair<int,int> a,pair<int,int> b){
+	if(a.second==b.second){
+		return a.first<b.first;
+	}else{
+		return a.second>b.second;
+	}
+}
+int main() {
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+	    cin >> n ;
+	    long long a[n];
+		map<int,int> s;
+	    for(int i=0;i<n;i++){
+	    	cin >> a[i];
+	    	s[a[i]]++;
+		}
+		vector<pair<int,int>> v;
+		for(auto x:s){
+			v.push_back(x);
+		}
+		sort(v.begin(),v.end(),cmp);
+		for(int i=0;i<v.size();i++){
+			for(int j=0;j<v[i].second;j++){
+				cout << v[i].first << " ";
+			}
+		}
+		cout << endl;
+	}
+    return 0;
+}
+
+
