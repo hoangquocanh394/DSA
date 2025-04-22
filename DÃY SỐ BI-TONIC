@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+void solve(int a[],int n){
+	int ans[n],tmp[n];
+	memset(ans,0,sizeof(ans));
+	memset(tmp,0,sizeof(tmp));
+	for(int i=1;i<n;i++){
+		for(int j=0;j<i;j++){
+			if(a[j]<a[i] && ans[i]<ans[j]+a[j]){
+				ans[i]=ans[j]+a[j];
+			}
+		}
+	}
+	for(int i=n-2;i>=0;i--){
+		for(int j=n-1;j>i;j--){
+			if(a[j]<a[i] && tmp[i]<tmp[j]+a[j]){
+				tmp[i]=tmp[j]+a[j];
+			}
+		}
+	}
+	int k=0;
+	for(int i=0;i<n;i++){
+		k=max(k,ans[i]+tmp[i]+a[i]);
+	}
+	cout << k << endl;
+}
+int main() {
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+	    cin >> n;
+	    int a[n];
+	    for(int i=0;i<n;i++){
+	    	cin >> a[i];
+		}
+		solve(a,n);
+	}
+    return 0;
+}
+
+
