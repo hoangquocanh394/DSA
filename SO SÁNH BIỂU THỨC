@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+string solve(string s){
+	stack<char> st,kt;
+	for(int i=0;i<s.length();i++){
+		if(s[i]=='('){
+			st.push(s[i]);
+			kt.push(s[i-1]);
+		}else if(s[i]==')'){
+			string k="";
+			while(st.size()){
+				char c=st.top();
+				st.pop();
+				char d=st.top();
+				st.pop();
+				k=c+k;
+				if(kt.top()=='-'){
+					if(d=='+'){
+						k='-'+k;
+					}else{
+						k='+'+k;
+					}				
+				}else{
+					k=d+k;
+				}
+				if(d=='('){
+					for(int j=1;j<k.length();j++){
+						st.push(k[j]);
+					}
+					break;
+				}	
+			}kt.pop();
+		}else{
+			st.push(s[i]);
+		}
+	}
+	string tmp="";
+	while(st.size()){
+		tmp=st.top()+tmp;
+		st.pop();
+	}
+	return tmp;
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		string a,b;
+		cin >> a >> b;
+		a=solve(a);
+		b=solve(b);
+		if(a==b){
+			cout << "YES" << endl;
+		}else{
+			cout << "NO" << endl;
+		}
+	}
+	return 0;
+}
