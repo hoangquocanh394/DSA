@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		string s;
+		cin >> s;
+		int m=0,d=0;
+		stack<pair<char,int>> q;
+		vector<int> v(s.length(),0);
+		for(int i=0;i<s.length();i++){
+			if(!q.empty() && s[i]==')' && q.top().first=='('){
+				v[i]=v[i-1];
+				if(q.top().second!=0){
+					v[i]+=v[q.top().second-1];
+				}
+				v[i]+=2;
+				q.pop();
+			}else{
+				q.push({s[i],i});
+			}
+		}
+		int ans=0;
+		for(int i=0;i<s.length();i++){
+			ans=max(ans,v[i]);
+		}
+		cout << ans << endl;
+	}
+}
+
