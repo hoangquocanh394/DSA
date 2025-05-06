@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		string s;
+		cin >> s;
+		long long sum=0;
+		for(int i=1;i<=s.length();i++){
+			for(int j=0;j<=s.length()-i;j++){
+				sum+=stoll(s.substr(j,i));
+			}
+		}
+		cout << sum << endl;
+	}
+}
+
