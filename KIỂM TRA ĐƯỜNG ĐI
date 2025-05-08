@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        vector<int> v[n+1];
+        for (int i = 0; i < m; i++) {
+            int x, y;
+            cin >> x >> y;
+            v[x].push_back(y);
+            v[y].push_back(x);
+        }
+        int q;
+        cin >> q;
+        while (q--) {
+            int x, y;
+            cin >> x >> y;
+            int ok=0,visited[n+1];
+            memset(visited,0,sizeof(visited));
+            queue<int> q;
+            q.push(x);
+            visited[x]=1;
+            while(!q.empty()){
+            	int k=q.front();
+            	q.pop();
+            	if(k==y){
+            		ok=1;
+            		break;
+				}
+				for(int i:v[k]){
+					if(visited[i]==0){
+						visited[i]=1;
+						q.push(i);
+					}
+				}
+			}
+			if(ok){
+				cout << "YES" << endl;
+			}else{
+				cout << "NO" << endl;
+			}
+        }
+    }
+    return 0;
+}
