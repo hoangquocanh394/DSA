@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> a[1000];
+int visited[1000],parent[1000];
+void DFS(int u,int v){
+	visited[u]=1;
+	parent[u]=v;
+	for(int i:a[u]){
+		if(visited[i]==0){
+			DFS(i,u);
+		}
+	}
+}
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m,u,v;
+		cin >> n >> m >> u >> v;
+        for(int i=0;i<=n;i++){
+        	a[i].clear();
+		}  
+        for(int i=0;i<m;i++){
+        	int x,y;
+        	cin >> x >> y;
+        	a[x].push_back(y);
+        	a[y].push_back(x);
+		}
+		memset(visited,0,sizeof(visited));
+		memset(parent,0,sizeof(parent));
+		DFS(u,0);
+		if(visited[v]==0){
+			cout << "-1";
+		}else{
+			vector<int> k;
+			k.push_back(v);
+			int i=parent[v];
+			while(i!=u){
+				k.push_back(i);
+				i=parent[i];
+			}
+			k.push_back(u);
+			for(int j=k.size()-1;j>=0;j--){
+				cout << k[j] << " ";
+			}
+		}
+		cout << endl;
+    }
+    return 0;
+}
