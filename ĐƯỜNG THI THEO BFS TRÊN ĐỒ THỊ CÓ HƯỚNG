@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> a[1000];
+int visited[1000],parent[1000];
+void BFS(int u,int v){
+	queue<int> q;
+	q.push(u);
+	visited[u]=1;
+	while(!q.empty()){
+		int k=q.front();
+		q.pop();
+		for(int i:a[k]){
+			if(visited[i]==0){
+				visited[i]=1;
+				q.push(i);
+				parent[i]=k;
+			}
+		}
+	}
+	if(visited[v]==0){
+		cout << "-1";
+	}else{
+		vector<int> k;
+		k.push_back(v);
+		int i=parent[v];
+		while(i!=u){
+			k.push_back(i);
+			i=parent[i];
+		}
+		k.push_back(u);
+		for(int j=k.size()-1;j>=0;j--){
+			cout << k[j] << " ";
+		}
+	}
+}
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m,u,v;
+		cin >> n >> m >> u >> v;
+        for(int i=0;i<=n;i++){
+        	a[i].clear();
+		}  
+        for(int i=0;i<m;i++){
+        	int x,y;
+        	cin >> x >> y;
+        	a[x].push_back(y);
+		}
+		memset(visited,0,sizeof(visited));
+		memset(parent,0,sizeof(parent));
+		BFS(u,v);
+		cout << endl;
+    }
+    return 0;
+}
