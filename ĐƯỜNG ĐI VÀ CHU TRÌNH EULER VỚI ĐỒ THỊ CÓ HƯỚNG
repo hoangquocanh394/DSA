@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+// chu trinh va duong di euler cho do thi vo huong
+// chu trinh: tat ca cac dinh la bac chan
+// duong di: co 2 dinh la bac le
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+		cin >> n >> m;
+		vector<int> a[n+1];
+		memset(a,0,sizeof(a));
+        for(int i=0;i<m;i++){
+        	int x,y;
+        	cin >> x >> y;
+        	a[x].push_back(y);
+        	a[y].push_back(x);
+		}
+		int ok=0;
+		for(int i=1;i<=n;i++){
+			if(a[i].size()%2==0){
+				ok++;
+			}
+		}
+		if(ok==n){
+			cout << "2" << endl;
+		}else if(ok==n-2){
+			cout << "1" << endl;
+		}else{
+			cout << "0" << endl;
+		}
+    }
+    return 0;
+}
