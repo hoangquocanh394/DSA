@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	int n;
+    	cin >> n;
+    	queue<pair<int,int>> s;
+    	s.push({n,0});
+    	set<int> k;
+    	k.insert(n);
+    	int count=INT_MAX;
+    	while(!s.empty()){
+    		int v=s.front().first;
+    		int x=s.front().second;
+    		s.pop();
+    		if(v==1){
+    			cout << x << endl;
+    			break;
+			}
+    		if(k.count(v-1)==0 ){
+    			k.insert(v-1);
+    			s.push({v-1,x+1});
+			}
+			for(int i=2;i<=sqrt(v);i++){
+				if(v%i==0){
+					int h=max(i,v/i);
+					if(k.count(h)==0){
+						k.insert(h);
+    					s.push({h,x+1});
+					}
+				}
+			}
+		}
+	}
+    return 0;
+}
