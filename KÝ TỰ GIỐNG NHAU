@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	int n,x,y,z;
+    	cin >> n >> x >> y >> z;
+    	int dp[n+2];
+    	dp[1]=x;
+    	dp[2]=dp[1]+min(x,z);
+    	for(int i=3;i<n+2;i++){
+    		dp[i]=dp[i-1]+x;
+    		if(i%2==0){
+    			dp[i]=min(dp[i],dp[i/2]+z);
+			}
+			dp[i-1]=min(dp[i-1],dp[i]+y);
+		}
+		cout << dp[n] << endl;
+	}
+    return 0;
+}
