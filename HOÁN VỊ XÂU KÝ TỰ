@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+string s;
+int used[1000];
+char a[1000];
+void hoanvi(int i){
+	if(i>=s.length()){
+		for(int i=0;i<s.length();i++){
+			cout << a[i];
+		}
+		cout << " ";
+	}else{
+		for(int j=0;j<s.length();j++){
+			if(used[j]==0){
+				used[j]=1;
+				a[i]=s[j];
+				hoanvi(i+1);
+				used[j]=0;
+			}
+		}
+	}
+}
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	cin >> s;
+    	memset(used,0,sizeof(used));
+    	for(int i=0;i<s.length();i++){
+    		a[i]=' ';
+		}
+    	hoanvi(0);
+    	cout << endl;
+	}
+    return 0;
+}
