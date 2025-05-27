@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	string s;
+    	cin >> s;
+    	stack<int> x;
+    	int pos=0;
+    	for(int i=0;i<s.length();i++){
+    		if(s[i]=='D'){
+    			if(i==0 || s[i-1]=='I'){
+    				x.push(pos+1);
+    				pos++;
+				}
+				x.push(pos+1);
+				pos++;
+			}else{
+				while(x.size()){
+					cout << x.top();
+					x.pop();
+				}
+				if(i==0){
+					cout << pos+1;
+					pos++;
+				}
+				if(s[i+1]!='D'){
+					cout << pos+1;
+					pos++;
+				}
+			}	
+		}
+		while(x.size()){
+			cout << x.top();
+			x.pop();
+		}
+		cout << endl;
+	}
+    return 0;
+}
