@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	int n,k;
+    	cin >> n >> k;
+    	int a[n];
+    	map<int,int> s;
+    	for(int i=0;i<n;i++){
+    		cin >> a[i];
+    		s[a[i]]++;
+		}
+		int count=0;
+		for(int i=0;i<n;i++){
+			if(s.count(k-a[i])){
+				if(k-a[i]==a[i]){
+					count+=s[k-a[i]]-1;
+				}else{
+					count+=s[k-a[i]];
+				}
+			}
+		}
+		cout << count/2 << endl;
+	}
+    return 0;
+}
