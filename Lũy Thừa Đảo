@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+const long long mod=1e9+7;
+long long sodao(long long n){
+	long long dao=0;
+	while(n>0){
+		dao=dao*10+n%10;
+		n/=10;
+	}
+	return dao;
+}
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	long long n;
+    	cin >> n;
+    	long long k=sodao(n),ans=1;
+    	while(k>0){
+    		if(k%2==1){
+    			ans*=n;
+    			ans%=mod;
+			}
+			n*=n;
+			n%=mod;
+			k/=2;
+		}
+		cout << ans << endl;
+	}
+    return 0;
+}
