@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long fibo[93];
+long long fibonaci(){
+	fibo[1]=1;
+	fibo[2]=1;
+	for(long long i=3;i<93;i++){
+		fibo[i]=fibo[i-2]+fibo[i-1];
+	}
+}
+char timkiem(long long n,long long k){
+	if(n==1) return 'A';
+	else if(n==2) return 'B';
+	else{
+		if(k<=fibo[n-2]){
+			return timkiem(n-2,k);
+		}else{
+			return timkiem(n-1,k-fibo[n-2]);
+		}
+	}
+}
+int main() {
+    int t;
+    cin >> t;
+    fibonaci();
+    while(t--){
+    	long long n,k;
+    	cin >> n >> k;
+    	cout << timkiem(n,k) << endl;
+	}
+    return 0;
+}
