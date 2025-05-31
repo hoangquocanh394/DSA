@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+int a[105],c[100];// khon co dau cach giua cac mang
+int n,x,ok=0;
+vector<vector<int>> v;
+void Try(int pos,int start,int sum){
+	for(int i=start;i<n;i++){
+		c[pos]=a[i];
+		int newsum=sum+a[i];
+		if(newsum==x){
+			vector<int> ans(c,c+pos+1);
+			v.push_back(ans);
+		}else if(newsum<x){
+			Try(pos+1,i,newsum);
+		}
+	}
+}
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+    	cin >> n >> x;
+    	for(int i=0;i<n;i++){
+    		cin >> a[i];
+		}
+		v.clear();
+		sort(a,a+n);
+		Try(0,0,0);
+		if (v.empty()) {
+            cout << "-1";
+        } else {
+            for (auto &k : v) {
+                cout << "[";
+                for (int i = 0; i < k.size(); i++) {
+                    cout << k[i];
+                    if (i != k.size() - 1) cout << " ";
+                }
+                cout << "]";
+            }
+        }
+		cout << endl;
+	}
+    return 0;
+}
