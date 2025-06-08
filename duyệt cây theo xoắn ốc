@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct TreeNode{
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode(int x){
+		val=x;
+		left=NULL;
+		right=NULL;
+	}
+};
+TreeNode* maketree(int n,vector<vector<string>> relation){
+	if(n==0) return NULL;
+	TreeNode* root=NULL;
+	unordered_map<int,TreeNode*> m;
+	for(int i=0;i<n;i++){
+		int parent=stoi(relation[i][0]);
+		int child=stoi(relation[i][1]);
+		char c=relation[i][2][0];
+		if(m.find(parent)==m.end()){
+			m[parent]=new TreeNode(parent);
+		}
+		TreeNode* parentnode=m[parent];
+		if(m.find(child)==m.end()){
+			m[child]=new TreeNode(child);
+		}
+		TreeNode* childnode=m[child];
+		if(c=='L'){
+			parentnode->left=childnode;
+		}else if(c=='R'){
+			parentnode->right=childnode;
+		}
+		if(!root){
+			root=parentnode;
+		}
+	}
+	return root;
+}
+vector<int> xoanoc(TreeNode* a){
+	vector<int> v;
+	if(a==nullptr) return v;
+	stack<TreeNode*> s1,s2;
+	s1.push(a);
+	while(!s1.empty() || !s2.empty()){
+		while(!s1.empty()){
+			TreeNode* t=s1.top();
+			s1.pop();
+			v.push_back(t->val);
+			if(t->right) s2.push(t->right);
+			if(t->left) s2.push(t->left);
+		}
+		while(!s2.empty()){
+			TreeNode* t=s2.top();
+			s2.pop();
+			v.push_back(t->val);
+			if(t->left) s1.push(t->left);
+			if(t->right) s1.push(t->right);
+		}
+	}
+	return v;
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		vector<vector<string>> relation(n,vector<string> (3));
+		for(int i=0;i<n;i++){
+			cin >> relation[i][0] >> relation[i][1] >> relation[i][2];
+		}
+		TreeNode* a=maketree(n,relation);
+		vector<int> v=xoanoc(a);
+		for(int i=0;i<v.size();i++){
+			cout << v[i] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
