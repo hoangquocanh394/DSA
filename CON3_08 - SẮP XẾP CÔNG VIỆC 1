@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool cmd(pair<int,int> a,pair<int,int> b){//chi can cai thu 2 lon hon la duoc
+	return a.second<b.second;//sx tang dan
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		pair<int,int> p[n];
+		for(int i=0;i<n;i++){
+			cin >> p[i].first;
+		}
+		for(int i=0;i<n;i++){
+			cin >> p[i].second;
+		}
+		sort(p,p+n,cmd);
+		int now=p[0].second,m=1;
+		for(int i=1;i<n;i++){
+			if(p[i].first>=now){
+				m++;
+				now=p[i].second;
+			}
+		}
+		cout << m << endl;
+	}
+	return 0;
+}
