@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct TreeNode{
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode (int x){
+		val=x;
+		left=NULL;
+		right=NULL;
+	}
+};
+TreeNode* maketree(int n,vector<vector<string>> relation){
+	if(n==0) return NULL;
+	TreeNode* root=NULL;
+	unordered_map<int,TreeNode*> m;
+	for(int i=0;i<n;i++){
+		int parent=stoi(relation[i][0]);
+		if(m.find(parent)==m.end()){
+			m[parent]=new TreeNode(parent);
+		}
+		TreeNode* parentnode=m[parent];
+		int child=stoi(relation[i][1]);
+		if(m.find(child)==m.end()){
+			m[child]=new TreeNode(child);
+		}
+		TreeNode* childnode=m[child];
+		char c=relation[i][2][0];
+		if(c=='L'){
+			parentnode->left=childnode;
+		}else if(c=='R'){
+			parentnode->right=childnode;
+		}
+		if(!root){
+			root=parentnode;
+		}
+	}
+	return root;
+}
+int check(TreeNode* a,int depth,int &leafdepth){
+	if(a==nullptr) return 1;
+	if(a->left==NULL && a->right==NULL){
+		if(leafdepth==-1){
+			leafdepth=depth;
+			return 1;
+		}
+		return leafdepth==depth;
+	}
+	return check(a->left,depth+1,leafdepth)&&check(a->right,depth+1,leafdepth);
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		vector<vector<string>> relation(n,vector<string> (3));
+		for(int i=0;i<n;i++){
+			cin >> relation[i][0] >> relation[i][1] >> relation[i][2];
+		}
+		TreeNode* r=maketree(n,relation);
+		int leafdepth=-1;
+		cout << check(r,0,leafdepth) << endl;
+	}
+	return 0;
+}
