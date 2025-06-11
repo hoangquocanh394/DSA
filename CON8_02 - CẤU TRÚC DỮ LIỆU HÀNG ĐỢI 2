@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t;
+	cin >> t;
+	cin.ignore();
+	queue<int> q;
+	while(t--){
+		string s;
+		getline(cin,s);
+		stringstream ss(s);
+		string tmp;
+		vector<string> v;
+		while(ss>>tmp){
+			v.push_back(tmp);
+		}
+		if(v[0]=="PUSH"){
+			q.push(stoi(v[1]));
+		}else if(v[0]=="PRINTFRONT"){
+			if(!q.empty()){
+				cout << q.front() << endl;
+			}else{
+				cout << "NONE" << endl;
+			}
+		}else if(v[0]=="POP"){
+			if(!q.empty()){
+				q.pop();
+			}
+		}
+	}
+	return 0;
+}
