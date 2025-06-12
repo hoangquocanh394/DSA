@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int a[100];
+int n;
+void Try(int i){
+    for(int j=0;j<2;j++){
+		a[i]=j;
+		if(i==n-1){
+			for(int j=0;j<n;j++){
+				if(a[j]==0){
+					cout << "A";
+				}else{
+					cout << "B";
+				}
+			}
+			cout << " ";
+		}else{
+			Try(i+1);
+		}
+	}
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		cin >> n;
+		memset(a,0,sizeof(a));
+		Try(0);
+		cout << endl;
+	}
+	return 0;
+}
