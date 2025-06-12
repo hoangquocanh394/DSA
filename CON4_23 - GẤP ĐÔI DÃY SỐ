@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int solve(int n,int k){
+	int m=pow(2,n-1);
+	if(k==m) return n;
+	else if(k>m) return solve(n-1,m-(k-m));
+	else return solve(n-1,k);
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n,k;
+		cin >> n >> k;
+		cout << solve(n,k) << endl;
+	}
+	return 0;
+}
