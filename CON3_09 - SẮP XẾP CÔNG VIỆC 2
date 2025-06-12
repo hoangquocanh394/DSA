@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool cmd(pair<int,int> a,pair<int,int> b){
+	return a.second>b.second;
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int n;
+		cin >> n;
+		pair<int,int> p[n];
+		for(int i=0;i<n;i++){
+			int j,k,h;
+			cin >> j >> k >> h;
+			p[i].first=k;
+			p[i].second=h;
+		}
+		sort(p,p+n,cmd);
+		int count=0,sum=0;
+		set<int> s;
+		for(int i=0;i<n;i++){
+			if(s.find(p[i].first)==s.end()){
+				sum+=p[i].second;
+				count++;
+				s.insert(p[i].first);
+			}else{
+				int k=p[i].first;
+				while(k>1){
+					k-=1;
+					if(s.find(k)==s.end()){
+						sum+=p[i].second;
+						count++;
+						s.insert(k);
+						break;
+					}
+				}
+			}
+		}
+		cout << count << " " << sum << endl;
+	}
+	return 0;
+}
