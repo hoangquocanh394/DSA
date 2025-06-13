@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<vector<int>> v;
+vector<int> x;
+int a[100],used[1000];
+int n,k;
+void Try(int i){
+	for(int j=1;j>=0;j--){
+		used[i]=j;
+		if(i==n-1){
+			int sum=0;
+			for(int j=0;j<n;j++){
+				if(used[j]){
+					sum+=a[j];
+				}
+			}
+			if(sum==k){
+				for(int j=0;j<n;j++){
+					if(used[j]){
+						x.push_back(a[j]);
+					}
+				}
+				v.push_back(x);
+			}
+			
+			x.clear();
+		}else{
+			Try(i+1);
+		}
+	}
+	
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		v.clear();
+		cin >> n >> k;
+		for(int i=0;i<n;i++){
+			cin >> a[i];
+		}
+		sort(a,a+n);
+		Try(0);
+		if(v.size()==0){
+			cout <<"-1";
+		}else{
+			for(int i=0;i<v.size();i++){
+				cout << "[";
+				for(int j=0;j<v[i].size();j++){
+					if(j==v[i].size()-1){
+						cout << v[i][j] << "] ";
+					}else{
+						cout << v[i][j] << " ";
+					}
+				}
+			}
+		}
+		
+		cout << endl;
+	}
+	return 0;
+}
