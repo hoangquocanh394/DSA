@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+	int t;
+	cin >> t;
+	stack<int> s;
+	cin.ignore();
+	while(t--){
+		string k;
+		getline(cin,k);
+		stringstream ss(k);
+		string tmp;
+		vector<string> v;
+		while(ss>>tmp){
+			v.push_back(tmp);
+		}
+		if(v[0]=="PUSH"){
+			s.push(stoi(v[1]));
+		}else if(v[0]=="POP"){
+			if(!s.empty()){
+				s.pop();
+			}
+		}else{
+			if(!s.empty()){
+				cout << s.top() << endl;
+			}else{
+				cout << "NONE" << endl;
+			}
+		}
+	}
+	return 0;
+}
