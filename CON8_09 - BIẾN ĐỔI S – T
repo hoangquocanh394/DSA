@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+void solve(int s,int t){
+	queue<pair<int,int>> q;
+	set<int> a;
+	q.push({0,s});
+	a.insert(s);
+	while(!q.empty()){
+		pair<int,int> k=q.front();
+		q.pop();
+		if(k.second==t){
+			cout << k.first << endl;
+			break;
+		}else{
+			if(a.find(k.second*2)==a.end()){
+				q.push({k.first+1,k.second*2});
+				a.insert(k.second*2);
+			}
+			if(a.find(k.second-1)==a.end()){
+				q.push({k.first+1,k.second-1});
+				a.insert(k.second-1);
+			}
+		}
+	}
+}
+int main(){
+	int t;
+	cin >> t;
+	while(t--){
+		int s,t;
+		cin >> s >> t;
+		solve(s,t);
+	}
+	return 0;
+}
