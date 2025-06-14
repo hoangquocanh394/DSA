@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+//so dinh di ra bang so dinh di vao
 int main() {
     int t;
     cin >> t;
